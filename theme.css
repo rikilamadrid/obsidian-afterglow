@@ -1,0 +1,28 @@
+/*
+ * Afterglow v0.1.0
+ *
+ * Generated from src/ by scripts/build.mjs. Do not edit by hand.
+ * Edit the modules in src/ and run: npm run build
+ */
+
+/* ===== src/00-placeholder.css ===== */
+
+/*
+ * Placeholder module — delivery chunk 1 only.
+ *
+ * Chunk 1 proves the theme installs, is listed, and is selectable. It changes
+ * nothing visually on purpose: the palette, the semantic roles and the
+ * Obsidian variable mapping arrive in chunk 2 and replace this file.
+ *
+ * The one declaration below is inert. It renders nothing and is here so that
+ * "the stylesheet actually loaded" can be confirmed in the developer console
+ * rather than inferred from the theme appearing in a list:
+ *
+ *   getComputedStyle(document.body).getPropertyValue('--ag-theme')
+ *
+ * should return "afterglow" once the theme is selected.
+ */
+
+body {
+  --ag-theme: 'afterglow';
+}

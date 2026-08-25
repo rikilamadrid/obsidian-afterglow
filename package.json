@@ -1,0 +1,15 @@
+{
+  "name": "obsidian-afterglow",
+  "version": "0.1.0",
+  "description": "Build and check tooling for the Afterglow Obsidian theme. Nothing here ships with the theme.",
+  "private": true,
+  "type": "module",
+  "license": "MIT",
+  "author": "Ricardo Lamadrid",
+  "scripts": {
+    "build": "node scripts/build.mjs"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
