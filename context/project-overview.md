@@ -84,7 +84,8 @@ human resolves it.
 | Preference | Dark palette: black-violet `#090611`, aubergine surfaces, ivory text, ultraviolet `#9A6BFF`, tangerine `#FF8A3D`, mint `#5CF2C7` | Starting values; contrast checks may adjust them. |
 | Preference | Avoid: notebook lines, coffee imagery, kawaii decoration, excessive pills, low-contrast pastel text, cyan-magenta cyberpunk, CRT effects, arcade fonts, wallpaper | Explicit anti-aesthetics. |
 | Requirement | `minAppVersion` is `1.5.0` | Chosen 2026-08-25. Obsidian is at 1.13.7; everything the token layer relies on shipped well before 1.5, so wide compatibility costs nothing. |
-| Open decision | Repository directory rename to `obsidian-afterglow` and GitHub remote creation | `TBD` — human action; the working directory is still `obsidian-theme`. |
+| Requirement | Local project directory is `~/Workspace/obsidian-afterglow` | Resolved 2026-08-25. The rename is done; this is not the vault theme directory, which must be named `Afterglow`. |
+| Requirement | Remote is `https://github.com/rikilamadrid/obsidian-afterglow`, and `main` tracks `origin/main` | Resolved 2026-08-25. Feature branches push to this remote; releases and the community directory submission point at it. |
 
 ## System
 
@@ -180,7 +181,7 @@ anything a prototype proved must not reach production.
 | `2026-08-25` | Theme name is `Afterglow`; modes are `Pastel Archive` and `Ultraviolet Library` | Chosen by the human after registry conflict research. The manifest `name` cannot change after directory submission. |
 | `2026-08-25` | One theme with two modes, never two products | Identity coherence is the whole product thesis. |
 | `2026-08-25` | Shared semantic token layer; modes supply values only | Prevents the two modes from drifting apart. |
-| `2026-08-25` | This repository is the standalone theme repository | Rename to `obsidian-afterglow` is pending human action. |
+| `2026-08-25` | This repository is the standalone theme repository, at `~/Workspace/obsidian-afterglow` and `https://github.com/rikilamadrid/obsidian-afterglow`, with `main` tracking `origin/main` | Rename and remote completed by the human on 2026-08-25; this closes the last open decision. |
 | `2026-08-25` | Author CSS as `src/` modules concatenated into a committed `theme.css` | Keeps the token layer separate from component styling; CI can make drift a build failure. |
 | `2026-08-25` | Node dev tooling plus GitHub Actions for the check suite | Contrast and token-parity checks need real computation, not grep. |
 | `2026-08-25` | MIT license | Permissive, and the common choice for Obsidian community themes. |
