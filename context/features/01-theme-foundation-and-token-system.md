@@ -114,3 +114,79 @@ overriding a documented variable over writing a selector.
 - Verification here is deliberately split: the check suite proves the artifact is
   valid, and a real Obsidian vault proves it looks right. Neither substitutes for
   the other.
+
+### Recorded palette revision — Pastel Archive (chunk 2, 2026-08-25)
+
+The first pass at the light mode was rejected on real-vault review: it read as
+sepia, not as Pastel Archive. The cause was not contrast and not lightness —
+the grounds were separated adequately (page/surface 1.099) but every one of
+them was a warm neutral at hue ~32°, so the pastels only ever appeared as
+callout tints and the mode looked like default Obsidian in beige.
+
+The revision moves the pastels into the **surface hierarchy** and aligns the
+two modes hue-for-hue:
+
+- Ivory `#FFF9F2` stays, but is now reserved for the reading canvas alone.
+- Sidebars, tabs, panels and secondary surfaces step into the violet identity
+  hue: surface `#EFE7FF` (h260), elevated `#E4DCFA` (h256).
+- Hover carries the second accent hue in both modes — sky-pale `#D9E9F7`
+  (h208) in light, a cyan-cast `#121E32` (h218) in dark — so ordinary
+  navigation puts the cyan on screen.
+- Every light family sits within 5° of its dark counterpart: violet 258/259,
+  sky 200/196, mint 166/163, amber 29/24, blush 347/350. That hue identity is
+  the mechanism behind "Ultraviolet Library seen in daylight"; it is not a
+  matter of taste and is now checked.
+
+Dark mode kept the black-violet foundation and strengthened accent presence
+through Obsidian variables only: violet grounds above the foundation, a more
+visible violet border `#3A2B55`, a brighter cyan link `#6FD3F7`, and the accent
+mapped onto border-hover, scrollbar-active, icon-active, nav-item-active and
+focused-tab text.
+
+### Recorded contrast adjustment — light palette (chunk 2, 2026-08-25)
+
+The stated light pastels cannot carry text on ivory `#FFF9F2`. Measured against
+the 4.5:1 requirement:
+
+| Pastel | Value | Contrast on ivory |
+| --- | --- | --- |
+| lilac | `#D8C7F0` | 1.50:1 |
+| powder blue | `#C9E2F2` | 1.28:1 |
+| sage | `#CFE3D3` | 1.29:1 |
+| apricot | `#F4C9A8` | 1.46:1 |
+| rose | `#E8B9C2` | 1.65:1 |
+
+The stated values are kept, unchanged, as **surfaces and tints** — selection,
+callout grounds, highlights. Every text-bearing light role instead uses a
+deepened variant of the same hue, so the palette's identity is preserved while
+the text is legible:
+
+| Role | Value | Derived from | On ivory | On elevated |
+| --- | --- | --- | --- | --- |
+| `--ag-accent-interactive` | `#5F3AB8` | lilac | 7.21:1 | 5.63:1 |
+| `--ag-link` / `--ag-info` | `#175D80` | powder blue | 6.89:1 | 5.38:1 |
+| `--ag-success` | `#14705B` | mint | 5.74:1 | — |
+| `--ag-warning` | `#8F4E10` | apricot | 6.15:1 | — |
+| `--ag-error` | `#A82B47` | blush | 6.48:1 | — |
+
+Text-bearing roles are checked against **every** ground, not just the canvas.
+That matters more after the revision than before it: sidebars and tabs are now
+colored, so UI text lands on violet surfaces routinely. The first candidate for
+`--ag-link` was `#1C6D95`, which passed on ivory at 5.47:1 but failed on the
+elevated ground at 4.27:1; it was deepened to `#175D80`.
+
+The dark palette needed no adjustment: ultraviolet `#9A6BFF` is 5.66:1 on
+black-violet `#090611`, and every other stated dark value is higher. The one
+dark value the revision forced was the hover ground: at `#152238` the accent
+fell to 4.49:1 against it, so it was darkened to `#121E32` (4.71:1).
+
+The narrowest passing pair is now `--ag-text-muted` on `--ag-selection`
+(4.95:1) in light. Worth re-checking if either value moves.
+
+### Deferred from chunk 2
+
+Dark-mode glow is defined as a role in both modes and applied to links. Focus
+ring reaches its color through Obsidian's `--background-modifier-border-focus`.
+Glow on the **active tab** and **graph nodes** needs per-surface selectors,
+which this Feature's Out of Scope excludes, so it moves to the per-surface
+Features rather than being smuggled in here.

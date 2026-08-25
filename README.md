@@ -6,9 +6,9 @@ spacing, borders and shapes; only the color values change.
 
 ![Afterglow](screenshot.png)
 
-> **Status: in development.** The installable skeleton is in place. The token
-> system and both palettes are not implemented yet, so the theme currently
-> renders Obsidian's default appearance.
+> **Status: in development.** The token system and both modes are in place.
+> Per-surface refinement — callouts, tables, code blocks, graph, command
+> palette — and the automated check suite are still to come.
 
 ## Install
 
@@ -45,6 +45,18 @@ Author CSS in `src/`. Modules are concatenated in filename order, so the
 numeric prefix is the cascade order. **`theme.css` is generated and committed —
 never edit it by hand**; it is committed because Obsidian and the community
 directory read it directly from the repository.
+
+| Module | Layer |
+| --- | --- |
+| `01-shared.css` | Everything that is not a color, defined once for both modes |
+| `02-palette.css` | Raw values, per mode. Never referenced outside layer 2 |
+| `03-roles.css` | Semantic roles — shared names, mode-specific values |
+| `04-obsidian.css` | Roles assigned to Obsidian's own CSS variables |
+| `05-motion.css` | `prefers-reduced-motion` |
+
+A color flows palette → role → Obsidian variable. Component styling consumes
+roles only; if a component needs a color with no role, the fix is a new role
+defined in **both** modes, not a raw value.
 
 To confirm the stylesheet is loaded rather than merely listed, open the
 developer console with the theme selected and run:

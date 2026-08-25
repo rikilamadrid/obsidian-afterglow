@@ -1,0 +1,111 @@
+/*
+ * Layer 2 — semantic roles. Shared names, mode-specific values.
+ *
+ * The two blocks below must define exactly the same set of --ag-* names. A
+ * role that exists in one mode and not the other is a defect, and the token
+ * parity check in chunk 3 exists to catch it.
+ *
+ * Names describe purpose, never appearance: --ag-accent-interactive, not
+ * --ag-lilac. That is what lets the dark mode swap ultraviolet in for deepened
+ * violet without a single consumer changing.
+ *
+ * The ground roles are ordered page -> page-alt -> surface -> elevated. In both
+ * modes that order steps away from the reading canvas and deeper into the
+ * identity hue, which is what gives sidebars, tabs and panels their separation
+ * without a single per-component selector.
+ */
+
+.theme-light {
+  /* Grounds — ivory reads, violet frames */
+  --ag-bg-page: var(--ag-palette-ivory);
+  --ag-bg-page-alt: var(--ag-palette-violet-wash);
+  --ag-bg-surface: var(--ag-palette-violet-pale);
+  --ag-bg-elevated: var(--ag-palette-violet-soft);
+  --ag-bg-hover: var(--ag-palette-sky-pale);
+  --ag-bg-form: var(--ag-palette-ivory-bright);
+
+  /* Text */
+  --ag-text-body: var(--ag-palette-ink);
+  --ag-text-heading: var(--ag-palette-ink-deep);
+  --ag-text-muted: var(--ag-palette-ink-soft);
+  --ag-text-faint: var(--ag-palette-ink-pale);
+  --ag-text-on-accent: var(--ag-palette-ivory);
+
+  /* Rules */
+  --ag-border: var(--ag-palette-violet-line);
+  --ag-rule: var(--ag-palette-violet-rule);
+
+  /* Interaction */
+  --ag-accent-interactive: var(--ag-palette-violet-deep);
+  --ag-accent-interactive-hover: var(--ag-palette-violet-deeper);
+  --ag-link: var(--ag-palette-sky-deep);
+  --ag-link-hover: var(--ag-palette-sky-deeper);
+  --ag-link-unresolved: var(--ag-palette-ink-pale);
+  --ag-selection: var(--ag-palette-violet-tint);
+  --ag-highlight: var(--ag-palette-amber-highlight);
+  --ag-focus-ring: var(--ag-palette-violet-deep);
+  --ag-disabled: var(--ag-palette-ink-ghost);
+
+  /* Semantic states */
+  --ag-info: var(--ag-palette-sky-deep);
+  --ag-info-surface: var(--ag-palette-sky-tint);
+  --ag-success: var(--ag-palette-mint-deep);
+  --ag-success-surface: var(--ag-palette-mint-tint);
+  --ag-warning: var(--ag-palette-amber-deep);
+  --ag-warning-surface: var(--ag-palette-amber-tint);
+  --ag-error: var(--ag-palette-blush-deep);
+  --ag-error-surface: var(--ag-palette-blush-tint);
+
+  /* Glow is a role in both modes so the token sets stay in parity. Light mode
+     is lit by paper, not by emission, so it resolves to nothing. */
+  --ag-glow: none;
+  --ag-glow-text: none;
+}
+
+.theme-dark {
+  /* Grounds */
+  --ag-bg-page: var(--ag-palette-black-violet);
+  --ag-bg-page-alt: var(--ag-palette-black-violet-alt);
+  --ag-bg-surface: var(--ag-palette-aubergine);
+  --ag-bg-elevated: var(--ag-palette-aubergine-light);
+  --ag-bg-hover: var(--ag-palette-sky-shadow);
+  --ag-bg-form: var(--ag-palette-aubergine-form);
+
+  /* Text */
+  --ag-text-body: var(--ag-palette-ivory);
+  --ag-text-heading: var(--ag-palette-ivory-bright);
+  --ag-text-muted: var(--ag-palette-lavender-grey);
+  --ag-text-faint: var(--ag-palette-lavender-dim);
+  --ag-text-on-accent: var(--ag-palette-black-violet);
+
+  /* Rules */
+  --ag-border: var(--ag-palette-violet-shadow);
+  --ag-rule: var(--ag-palette-violet-shadow-soft);
+
+  /* Interaction */
+  --ag-accent-interactive: var(--ag-palette-ultraviolet);
+  --ag-accent-interactive-hover: var(--ag-palette-ultraviolet-bright);
+  --ag-link: var(--ag-palette-sky);
+  --ag-link-hover: var(--ag-palette-sky-bright);
+  --ag-link-unresolved: var(--ag-palette-lavender-dim);
+  --ag-selection: var(--ag-palette-violet-deep);
+  --ag-highlight: var(--ag-palette-amber-highlight);
+  --ag-focus-ring: var(--ag-palette-ultraviolet-bright);
+  --ag-disabled: var(--ag-palette-lavender-ghost);
+
+  /* Semantic states */
+  --ag-info: var(--ag-palette-sky);
+  --ag-info-surface: var(--ag-palette-sky-ground);
+  --ag-success: var(--ag-palette-mint);
+  --ag-success-surface: var(--ag-palette-mint-ground);
+  --ag-warning: var(--ag-palette-tangerine);
+  --ag-warning-surface: var(--ag-palette-amber-ground);
+  --ag-error: var(--ag-palette-coral);
+  --ag-error-surface: var(--ag-palette-coral-ground);
+
+  /* Ultraviolet Library's one emissive gesture. Applied only to short-lived or
+     selected elements — never to paragraph text, which is what separates a
+     luminous theme from an unreadable one. */
+  --ag-glow: 0 0 8px rgb(154 107 255 / 45%);
+  --ag-glow-text: 0 0 12px rgb(111 211 247 / 35%);
+}

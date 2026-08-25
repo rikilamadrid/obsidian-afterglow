@@ -1,0 +1,173 @@
+/*
+ * Layer 3 — Obsidian variable mapping.
+ *
+ * Roles are assigned to Obsidian's own documented CSS variables, once, under
+ * body. Because the role values are supplied per mode in 03-roles.css, this
+ * mapping never needs a light or dark variant of its own.
+ *
+ * This file is why the theme reaches nearly every surface without per-surface
+ * CSS. Preferring a documented variable over a selector is also what keeps it
+ * alive across Obsidian updates: a variable is a contract, a class chain is a
+ * guess.
+ */
+
+body {
+  /* --- Typography -------------------------------------------------------
+     The *-theme variables are Obsidian's designated slot for themes, and sit
+     below the user's own font setting in the cascade. Setting them means a
+     reader who has chosen a font keeps it. */
+  --font-text-theme: var(--ag-font-text);
+  --font-interface-theme: var(--ag-font-interface);
+  --font-monospace-theme: var(--ag-font-mono);
+
+  --line-height-normal: var(--ag-line-height-text);
+  --line-height-tight: var(--ag-line-height-tight);
+
+  --h1-size: var(--ag-scale-h1);
+  --h2-size: var(--ag-scale-h2);
+  --h3-size: var(--ag-scale-h3);
+  --h4-size: var(--ag-scale-h4);
+  --h5-size: var(--ag-scale-h5);
+  --h6-size: var(--ag-scale-h6);
+
+  --h1-weight: var(--ag-weight-heading-strong);
+  --h2-weight: var(--ag-weight-heading);
+  --h3-weight: var(--ag-weight-heading);
+  --h4-weight: var(--ag-weight-heading);
+  --h5-weight: var(--ag-weight-heading);
+  --h6-weight: var(--ag-weight-heading);
+
+  --h1-color: var(--ag-text-heading);
+  --h2-color: var(--ag-text-heading);
+  --h3-color: var(--ag-text-heading);
+  --h4-color: var(--ag-text-heading);
+  --h5-color: var(--ag-text-heading);
+  --h6-color: var(--ag-text-heading);
+
+  /* --- Shape ----------------------------------------------------------- */
+  --radius-s: var(--ag-radius-s);
+  --radius-m: var(--ag-radius-m);
+  --radius-l: var(--ag-radius-l);
+  --radius-xl: var(--ag-radius-xl);
+  --border-width: var(--ag-border-width);
+  --divider-width: var(--ag-border-width);
+
+  /* --- Backgrounds ------------------------------------------------------ */
+  --background-primary: var(--ag-bg-page);
+  --background-primary-alt: var(--ag-bg-page-alt);
+  --background-secondary: var(--ag-bg-surface);
+  --background-secondary-alt: var(--ag-bg-elevated);
+
+  --background-modifier-hover: var(--ag-bg-hover);
+  --background-modifier-active-hover: var(--ag-selection);
+  --background-modifier-border: var(--ag-border);
+  --background-modifier-border-hover: var(--ag-accent-interactive);
+  --background-modifier-border-focus: var(--ag-focus-ring);
+  --background-modifier-form-field: var(--ag-bg-form);
+  --background-modifier-error: var(--ag-error-surface);
+  --background-modifier-error-hover: var(--ag-error-surface);
+  --background-modifier-success: var(--ag-success-surface);
+  --background-modifier-message: var(--ag-bg-elevated);
+
+  --divider-color: var(--ag-rule);
+
+  /* --- Text ------------------------------------------------------------- */
+  --text-normal: var(--ag-text-body);
+  --text-muted: var(--ag-text-muted);
+  --text-faint: var(--ag-text-faint);
+  --text-on-accent: var(--ag-text-on-accent);
+  --text-on-accent-inverted: var(--ag-text-body);
+  --text-accent: var(--ag-accent-interactive);
+  --text-accent-hover: var(--ag-accent-interactive-hover);
+  --text-selection: var(--ag-selection);
+  --text-highlight-bg: var(--ag-highlight);
+
+  --text-error: var(--ag-error);
+  --text-warning: var(--ag-warning);
+  --text-success: var(--ag-success);
+
+  /* --- Interaction ------------------------------------------------------ */
+  --interactive-normal: var(--ag-bg-surface);
+  --interactive-hover: var(--ag-bg-elevated);
+  --interactive-accent: var(--ag-accent-interactive);
+  --interactive-accent-hover: var(--ag-accent-interactive-hover);
+  --caret-color: var(--ag-accent-interactive);
+
+  /* --- Links ------------------------------------------------------------ */
+  --link-color: var(--ag-link);
+  --link-color-hover: var(--ag-link-hover);
+  --link-external-color: var(--ag-link);
+  --link-external-color-hover: var(--ag-link-hover);
+  --link-unresolved-color: var(--ag-link-unresolved);
+  --tag-color: var(--ag-accent-interactive);
+
+  /* --- Application chrome ----------------------------------------------
+     Sidebars, tabs, ribbon, status bar and icons, reached entirely through
+     Obsidian's own documented variables. This is where the ground hierarchy
+     becomes visible: the editor sits on the reading canvas, every frame around
+     it sits on a surface stepped into the identity hue.
+
+     Callouts, tables, code blocks, properties, checkboxes, the command palette
+     and modals are deliberately absent — those are later Features, and reaching
+     them would mean writing selectors. */
+  --tab-container-background: var(--ag-bg-elevated);
+  --tab-background-active: var(--ag-bg-page);
+  --tab-text-color: var(--ag-text-muted);
+  --tab-text-color-active: var(--ag-text-body);
+  --tab-text-color-focused-active: var(--ag-accent-interactive);
+  --tab-outline-color: var(--ag-border);
+  --tab-divider-color: var(--ag-rule);
+
+  --nav-item-color: var(--ag-text-muted);
+  --nav-item-color-hover: var(--ag-text-body);
+  --nav-item-color-active: var(--ag-accent-interactive);
+  --nav-item-color-selected: var(--ag-accent-interactive);
+  --nav-item-background-hover: var(--ag-bg-hover);
+  --nav-item-background-active: var(--ag-selection);
+  --nav-item-background-selected: var(--ag-selection);
+  --nav-indentation-guide-color: var(--ag-border);
+  --nav-collapse-icon-color: var(--ag-text-faint);
+
+  --ribbon-background: var(--ag-bg-elevated);
+  --ribbon-background-collapsed: var(--ag-bg-elevated);
+  --ribbon-color: var(--ag-text-muted);
+
+  --titlebar-background: var(--ag-bg-elevated);
+  --titlebar-background-focused: var(--ag-bg-elevated);
+  --titlebar-text-color: var(--ag-text-muted);
+
+  --status-bar-background: var(--ag-bg-elevated);
+  --status-bar-text-color: var(--ag-text-muted);
+  --status-bar-border-color: var(--ag-border);
+
+  --scrollbar-bg: transparent;
+  --scrollbar-thumb-bg: var(--ag-border);
+  --scrollbar-active-thumb-bg: var(--ag-accent-interactive);
+
+  --icon-color: var(--ag-text-muted);
+  --icon-color-hover: var(--ag-text-body);
+  --icon-color-active: var(--ag-accent-interactive);
+  --icon-color-focused: var(--ag-text-body);
+
+  /* --- Graph -----------------------------------------------------------
+     Mapped from existing roles rather than given roles of their own: the graph
+     is the accent and the rule color, seen from further away. */
+  --graph-line: var(--ag-border);
+  --graph-node: var(--ag-text-muted);
+  --graph-node-focused: var(--ag-accent-interactive);
+  --graph-node-tag: var(--ag-success);
+  --graph-node-attachment: var(--ag-warning);
+  --graph-node-unresolved: var(--ag-text-faint);
+}
+
+/*
+ * Ultraviolet Library's glow, applied to links only.
+ *
+ * An element selector, not a class chain, so no Obsidian internal is being
+ * relied on. Focus ring, caret and active tab reach their glow through the
+ * variable mapping above where Obsidian exposes one; the rest is per-surface
+ * work and belongs to a later Feature.
+ */
+.theme-dark a {
+  text-shadow: var(--ag-glow-text);
+}
