@@ -1,0 +1,11 @@
+# Transient Pathfinder workspace state — one session, one machine.
+# Never ignore context/ as a whole; the rest of it is durable project truth.
+context/current-feature.md
+context/handoff.md
+
+# Node dev tooling (dev-only; nothing here ships in the theme)
+node_modules/
+npm-debug.log*
+
+# OS noise
+.DS_Store
