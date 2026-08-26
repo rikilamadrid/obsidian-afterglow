@@ -188,6 +188,10 @@ anything a prototype proved must not reach production.
 | `2026-08-25` | Style Settings deferred past the first release | Adding it early would lock token names into a public contract before they settle. |
 | `2026-08-25` | System and local font stacks only; no bundled font files | Avoids licensing and size cost, and satisfies the no-remote-assets policy without effort. |
 | `2026-08-25` | `minAppVersion` is `1.5.0` | Wide compatibility at no cost; the token layer needs nothing newer. |
+| `2026-08-26` | Each theme is its own repository. `obsidian-afterglow` stays single-theme and standalone. | Obsidian lists one theme per repository entry, a release tag must match one `manifest.json` `version`, and a vault theme directory must be named exactly for the theme it holds. A multi-theme repository would fight all three. |
+| `2026-08-26` | Branding, spec and workflow templates, and tooling may be shared across theme repositories. Shipped artifacts — `manifest.json`, `theme.css`, releases — never are. | Sharing the things that make themes feel like a family costs nothing; sharing a shipped artifact is how two products become one broken one. |
+| `2026-08-26` | Toolkit extraction is deferred until the same check has been fixed twice in two theme repositories. | One repository is not evidence of duplication. Nothing has been copied even once, the check thresholds are still moving, and a package with a single consumer is a second thing to version for no return. A template repository is the cheaper first move when the signal arrives. |
+| `2026-08-26` | The real screenshot requirement moves from Feature 01 to Feature 02. Feature 01 is complete on the token system, check suite and CI. | The placeholder is a documentation asset, not a token-system defect. Holding a delivered Feature open for one asset misreports the state of the work. |
 
 ## Learning
 

@@ -2,7 +2,7 @@
 
 ## Status
 
-In Progress
+Complete
 
 ## Goal
 
@@ -102,6 +102,8 @@ overriding a documented variable over writing a selector.
   pull request.
 - `grep -rn '!important' src/ theme.css` returns nothing.
 - Screenshots of both modes in a real vault, showing the same document.
+  **Moved to Feature 02** — see "Screenshot requirement moved to Feature 02"
+  below. Not satisfied here, and deliberately so.
 
 ## Notes / Decisions
 
@@ -114,6 +116,29 @@ overriding a documented variable over writing a selector.
 - Verification here is deliberately split: the check suite proves the artifact is
   valid, and a real Obsidian vault proves it looks right. Neither substitutes for
   the other.
+
+### Screenshot requirement moved to Feature 02 (2026-08-26)
+
+`screenshot.png` in this repository is still the 879-byte flat ivory
+placeholder. It satisfies `required-files`, which checks the file's dimensions
+and not its content, and it satisfies nothing else.
+
+That requirement now belongs to
+`context/features/02-afterglow-brand-identity-and-release-documentation.md`,
+which owns the real Obsidian capture, the light and dark previews, the README
+that presents them, and a new check that fails on a placeholder. The human
+approved the move on 2026-08-26.
+
+What this Feature actually delivered stands on its own and is verified: the
+installable theme skeleton, the three-layer token system with both modes, and
+the nine-check suite with fourteen negative cases running in GitHub Actions.
+The one acceptance criterion that depends on a real screenshot is carried by
+Feature 02 rather than left open here, because holding a completed Feature open
+for a single asset would misreport the state of the token system.
+
+Both modes were reviewed in a real vault during chunk 2, and that review is
+what produced the palette revision recorded below. The capture of that review
+is what Feature 02 supplies.
 
 ### Recorded palette revision — Pastel Archive (chunk 2, 2026-08-25)
 
