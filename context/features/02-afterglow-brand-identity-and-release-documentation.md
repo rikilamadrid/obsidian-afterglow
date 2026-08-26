@@ -2,7 +2,7 @@
 
 ## Status
 
-Ready
+In Progress
 
 ## Goal
 
@@ -196,7 +196,10 @@ Perform these in the test vault with the repository linked at
 - The GitHub Actions workflow is green on the Feature branch and its result is
   visible on the pull request.
 - `grep -rn 'url(' src/ theme.css` returns nothing.
-- `grep -rniE 'https?://|xlink:href' assets/*.svg` returns nothing.
+- The SVG assets carry nothing that loads a resource. Verified by the two greps
+  in "SVG asset security" under Notes below: the broad one returns only the
+  `xmlns` namespace declaration on line 1 of each file, and the narrow one — the
+  same pattern with that single declaration filtered out — returns nothing.
 - Opening the pull request's Files tab and the rendered README on GitHub shows
   the mark, both previews, and no broken image, in both GitHub light and dark
   themes.
@@ -205,6 +208,66 @@ Perform these in the test vault with the repository linked at
 - `git status` is clean and `theme.css` is unchanged by this Feature's diff.
 
 ## Notes / Decisions
+
+### SVG asset security
+
+The assets must load nothing. No remote fetch, no local resource reference, no
+script, no embedded raster, no font dependency. That requirement is not relaxed
+by anything below.
+
+One string has to be allowed through, and exactly one:
+
+```
+xmlns="http://www.w3.org/2000/svg"
+```
+
+**Why it is necessary.** An SVG served as a file — anything a README reaches
+through `<img src>` or `<picture>` — is parsed as standalone XML. Without the
+SVG namespace declaration the document has no namespace, the renderer does not
+recognize its elements as SVG, and the file does not draw. GitHub renders README
+images exactly this way. The declaration is not optional and no alternative
+spelling exists.
+
+**Why it is safe.** A namespace name is an identifier, not a locator. Nothing
+dereferences it: no renderer, browser, or parser issues a request for
+`http://www.w3.org/2000/svg`. It could have been any unique string; the W3C
+chose a URL so namespaces would not collide. It appears once, on the root
+element, and it is a fixed constant — it can be matched literally, so allowing
+it opens nothing else.
+
+**How it is checked.** Two greps, both required. The first proves the only
+match is the declaration itself; the second proves nothing else matches.
+
+```sh
+# 1. Broad scan. Expected output: exactly one line per SVG, each the xmlns
+#    declaration on line 1. Any other line is a failure.
+grep -rniE 'https?://|xlink:href' assets/*.svg
+
+# 2. The same scan with that one declaration filtered out. Expected: nothing.
+grep -rniE 'https?://|xlink:href' assets/*.svg \
+  | grep -v 'xmlns="http://www.w3.org/2000/svg"'
+
+# 3. Every other resource-loading mechanism. Expected: nothing.
+grep -rniE '<script|on[a-z]+=|<image|<use|href=|src=|@import|data:|<foreignObject|<font|<text' assets/*.svg
+
+# 4. Font dependency. Expected: nothing.
+grep -rniE 'font-family|font-face|@font' assets/*.svg
+```
+
+Grep 2 is what keeps the exception narrow. It matches the full declaration as a
+literal string, not `http` or `www.w3.org`, so a second namespace, a differently
+spelled one, or any other URL anywhere in the file still fails. Grep 3 covers
+what a URL scan cannot see: `xlink:href` is listed in greps 1 and 2 because it
+is the historical way to pull an external resource into an SVG, and `href`,
+`src`, `<use>`, `<image>` and `data:` are the modern ones.
+
+When the `docs-assets` check is built in chunk 3, it implements greps 2, 3 and 4
+as its assertions and gets a negative case that adds a remote reference to an
+asset and expects the check to catch it.
+
+This exception covers the `xmlns` declaration and nothing else. `xmlns:xlink`,
+in particular, is **not** allowed: nothing here needs it, and its presence would
+mean something is reaching for an external resource.
 
 ### Recorded decision — one repository per theme
 

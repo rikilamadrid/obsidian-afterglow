@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-labelledby="afterglow-mark-title">
+  <title id="afterglow-mark-title">Afterglow</title>
+  <metadata>
+    Palette provenance, exact custom property names as declared in
+    src/02-palette.css under .theme-dark:
+    #9a6bff = --ag-palette-ultraviolet
+    #6fd3f7 = --ag-palette-sky
+  </metadata>
+  <!--
+    Afterglow - the light that stays after the source has gone.
+
+    A source half-sunk below the horizon, the arcs of light still above it, and
+    the two fading bands it leaves on the way down.
+
+    Both colors are palette values from src/02-palette.css, unchanged:
+
+      #9a6bff  ag-palette-ultraviolet  (.theme-dark)  every structural shape
+      #6fd3f7  ag-palette-sky          (.theme-dark)  the core, only ever drawn
+                                                      on top of the violet disc
+
+    Those two names are written here without their leading double hyphen, which
+    an XML comment may not contain. The exact property names are in the
+    metadata element above, where they can be grepped verbatim.
+
+    Ultraviolet is the one palette value that clears 3:1 against both GitHub
+    page backgrounds - 3.55:1 on #ffffff and 5.34:1 on #0d1117 - so it carries
+    everything load-bearing. Sky reads at 2.08:1 against the violet it sits on:
+    soft by intent, decorative, and never responsible for the silhouette.
+
+    No external reference, no script, no font. Nothing in src/ or theme.css may
+    point at this file; css-policy forbids url() there.
+  -->
+  <g fill="none" stroke="#9a6bff" stroke-linecap="round">
+    <!-- outer glow -->
+    <path d="M10.7 23.1 A26 26 0 0 1 53.3 23.1" stroke-width="3" opacity="0.45"/>
+    <!-- inner glow -->
+    <path d="M14.8 30 A19 19 0 0 1 49.2 30" stroke-width="3.5" opacity="0.7"/>
+    <!-- horizon -->
+    <path d="M6 38 H58" stroke-width="4"/>
+    <!-- what the light leaves behind on the way down -->
+    <path d="M18 46 H46" stroke-width="3" opacity="0.55"/>
+    <path d="M26 52 H38" stroke-width="3" opacity="0.42"/>
+  </g>
+  <!-- the source, half below the horizon -->
+  <path d="M20 38 A12 12 0 0 1 44 38 Z" fill="#9a6bff"/>
+  <path d="M26 38 A6 6 0 0 1 38 38 Z" fill="#6fd3f7"/>
+</svg>
