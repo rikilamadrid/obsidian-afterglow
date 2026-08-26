@@ -1,0 +1,62 @@
+/*
+ * Shared foundation — identical in both modes.
+ *
+ * Everything that is NOT a color lives here and is defined exactly once.
+ * This file is what makes Pastel Archive and Ultraviolet Library read as one
+ * theme: same typography, same rhythm, same shapes. If a value here ever needs
+ * to differ between modes, that is a design regression, not a new token.
+ */
+
+body {
+  /* Typography — system and local families only. No bundled or remote fonts.
+     Each stack degrades through progressively more common families and ends
+     at a generic, so an absent font is never a broken surface. */
+  --ag-font-text:
+    'Iowan Old Style', 'Palatino Linotype', 'Book Antiqua', Palatino, Georgia,
+    'Times New Roman', serif;
+  --ag-font-interface:
+    -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue',
+    Arial, sans-serif;
+  --ag-font-mono:
+    ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas,
+    'Liberation Mono', monospace;
+
+  /* Type scale — a 1.2 modular scale in em, so it follows the reader's own
+     font size setting instead of overriding it. */
+  --ag-scale-h1: 2.074em;
+  --ag-scale-h2: 1.728em;
+  --ag-scale-h3: 1.44em;
+  --ag-scale-h4: 1.2em;
+  --ag-scale-h5: 1em;
+  --ag-scale-h6: 0.833em;
+
+  --ag-weight-heading: 600;
+  --ag-weight-heading-strong: 700;
+  --ag-line-height-text: 1.6;
+  --ag-line-height-tight: 1.25;
+
+  /* Spacing scale. Afterglow's own rhythm, consumed by later component work.
+     Obsidian's --size-* layout scale is deliberately left alone: rewriting it
+     would move every surface in the app for no gain here. */
+  --ag-space-1: 2px;
+  --ag-space-2: 4px;
+  --ag-space-3: 8px;
+  --ag-space-4: 12px;
+  --ag-space-5: 16px;
+  --ag-space-6: 24px;
+  --ag-space-7: 32px;
+  --ag-space-8: 48px;
+
+  /* Borders and shapes. */
+  --ag-border-width: 1px;
+  --ag-border-width-thick: 2px;
+  --ag-radius-s: 4px;
+  --ag-radius-m: 8px;
+  --ag-radius-l: 12px;
+  --ag-radius-xl: 16px;
+
+  /* Motion. Neutralized in 05-motion.css under prefers-reduced-motion. */
+  --ag-transition-fast: 120ms;
+  --ag-transition-base: 200ms;
+  --ag-easing: cubic-bezier(0.4, 0, 0.2, 1);
+}

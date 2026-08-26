@@ -1,0 +1,14 @@
+/*
+ * Reduced motion.
+ *
+ * The token layer introduces motion only as duration tokens, so honoring the
+ * preference means collapsing them at the source. Anything that later consumes
+ * --ag-transition-* inherits this for free and cannot forget to.
+ */
+
+@media (prefers-reduced-motion: reduce) {
+  body {
+    --ag-transition-fast: 0ms;
+    --ag-transition-base: 0ms;
+  }
+}

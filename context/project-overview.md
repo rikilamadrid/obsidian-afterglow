@@ -84,7 +84,8 @@ human resolves it.
 | Preference | Dark palette: black-violet `#090611`, aubergine surfaces, ivory text, ultraviolet `#9A6BFF`, tangerine `#FF8A3D`, mint `#5CF2C7` | Starting values; contrast checks may adjust them. |
 | Preference | Avoid: notebook lines, coffee imagery, kawaii decoration, excessive pills, low-contrast pastel text, cyan-magenta cyberpunk, CRT effects, arcade fonts, wallpaper | Explicit anti-aesthetics. |
 | Requirement | `minAppVersion` is `1.5.0` | Chosen 2026-08-25. Obsidian is at 1.13.7; everything the token layer relies on shipped well before 1.5, so wide compatibility costs nothing. |
-| Open decision | Repository directory rename to `obsidian-afterglow` and GitHub remote creation | `TBD` — human action; the working directory is still `obsidian-theme`. |
+| Requirement | Local project directory is `~/Workspace/obsidian-afterglow` | Resolved 2026-08-25. The rename is done; this is not the vault theme directory, which must be named `Afterglow`. |
+| Requirement | Remote is `https://github.com/rikilamadrid/obsidian-afterglow`, and `main` tracks `origin/main` | Resolved 2026-08-25. Feature branches push to this remote; releases and the community directory submission point at it. |
 
 ## System
 
@@ -180,13 +181,17 @@ anything a prototype proved must not reach production.
 | `2026-08-25` | Theme name is `Afterglow`; modes are `Pastel Archive` and `Ultraviolet Library` | Chosen by the human after registry conflict research. The manifest `name` cannot change after directory submission. |
 | `2026-08-25` | One theme with two modes, never two products | Identity coherence is the whole product thesis. |
 | `2026-08-25` | Shared semantic token layer; modes supply values only | Prevents the two modes from drifting apart. |
-| `2026-08-25` | This repository is the standalone theme repository | Rename to `obsidian-afterglow` is pending human action. |
+| `2026-08-25` | This repository is the standalone theme repository, at `~/Workspace/obsidian-afterglow` and `https://github.com/rikilamadrid/obsidian-afterglow`, with `main` tracking `origin/main` | Rename and remote completed by the human on 2026-08-25; this closes the last open decision. |
 | `2026-08-25` | Author CSS as `src/` modules concatenated into a committed `theme.css` | Keeps the token layer separate from component styling; CI can make drift a build failure. |
 | `2026-08-25` | Node dev tooling plus GitHub Actions for the check suite | Contrast and token-parity checks need real computation, not grep. |
 | `2026-08-25` | MIT license | Permissive, and the common choice for Obsidian community themes. |
 | `2026-08-25` | Style Settings deferred past the first release | Adding it early would lock token names into a public contract before they settle. |
 | `2026-08-25` | System and local font stacks only; no bundled font files | Avoids licensing and size cost, and satisfies the no-remote-assets policy without effort. |
 | `2026-08-25` | `minAppVersion` is `1.5.0` | Wide compatibility at no cost; the token layer needs nothing newer. |
+| `2026-08-26` | Each theme is its own repository. `obsidian-afterglow` stays single-theme and standalone. | Obsidian lists one theme per repository entry, a release tag must match one `manifest.json` `version`, and a vault theme directory must be named exactly for the theme it holds. A multi-theme repository would fight all three. |
+| `2026-08-26` | Branding, spec and workflow templates, and tooling may be shared across theme repositories. Shipped artifacts — `manifest.json`, `theme.css`, releases — never are. | Sharing the things that make themes feel like a family costs nothing; sharing a shipped artifact is how two products become one broken one. |
+| `2026-08-26` | Toolkit extraction is deferred until the same check has been fixed twice in two theme repositories. | One repository is not evidence of duplication. Nothing has been copied even once, the check thresholds are still moving, and a package with a single consumer is a second thing to version for no return. A template repository is the cheaper first move when the signal arrives. |
+| `2026-08-26` | The real screenshot requirement moves from Feature 01 to Feature 02. Feature 01 is complete on the token system, check suite and CI. | The placeholder is a documentation asset, not a token-system defect. Holding a delivered Feature open for one asset misreports the state of the work. |
 
 ## Learning
 

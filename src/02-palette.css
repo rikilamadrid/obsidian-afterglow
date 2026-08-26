@@ -1,0 +1,106 @@
+/*
+ * Layer 1 — palette. Raw color values, per mode.
+ *
+ * These names describe pigment, not purpose. Nothing outside 03-roles.css may
+ * reference an --ag-palette-* value: component styling that reaches past the
+ * role layer is how two modes start to drift apart.
+ *
+ * Both palettes are organised into the same five hue families — violet, sky,
+ * mint, amber, blush — and each light family sits within 5 degrees of its dark
+ * counterpart on the color wheel. That is the mechanism behind "Ultraviolet
+ * Library seen in daylight": the two modes are not analogous palettes, they are
+ * the same hues at different lightness.
+ *
+ * In light mode the pale end of each family does structural work — sidebars,
+ * tabs, panels, hover — rather than only tinting callouts. Ivory stays the
+ * reading canvas and nothing else, which is what keeps the mode from reading
+ * as sepia.
+ *
+ * The pale values cannot carry text: measured on ivory they land near 1.3:1
+ * against a 4.5:1 requirement. Every text-bearing role therefore uses the deep
+ * end of the same family. See the Feature notes for the recorded adjustment.
+ */
+
+.theme-light {
+  /* Canvas — the one warm surface, reserved for reading */
+  --ag-palette-ivory: #fff9f2;
+  --ag-palette-ivory-bright: #fffcfa;
+
+  /* Violet — the identity hue, and the light mode's structural surfaces */
+  --ag-palette-violet-wash: #faf6ff;
+  --ag-palette-violet-pale: #efe7ff;
+  --ag-palette-violet-soft: #e4dcfa;
+  --ag-palette-violet-tint: #d6c6f5;
+  --ag-palette-violet-rule: #e7def9;
+  --ag-palette-violet-line: #d2c1ee;
+  --ag-palette-violet-deep: #5f3ab8;
+  --ag-palette-violet-deeper: #4a2c93;
+
+  /* Sky */
+  --ag-palette-sky-pale: #d9e9f7;
+  --ag-palette-sky-tint: #ddeef9;
+  --ag-palette-sky-deep: #175d80;
+  --ag-palette-sky-deeper: #0f4e6b;
+
+  /* Mint */
+  --ag-palette-mint-tint: #d9f0e6;
+  --ag-palette-mint-deep: #14705b;
+
+  /* Amber */
+  --ag-palette-amber-tint: #fbebd3;
+  --ag-palette-amber-highlight: #fae3b4;
+  --ag-palette-amber-deep: #8f4e10;
+
+  /* Blush */
+  --ag-palette-blush-tint: #fadfe5;
+  --ag-palette-blush-deep: #a82b47;
+
+  /* Ink — carries a faint violet cast so text sits in the same family as the
+     surfaces rather than reading as neutral grey dropped on a colored page */
+  --ag-palette-ink: #27242a;
+  --ag-palette-ink-deep: #1d1826;
+  --ag-palette-ink-soft: #574e63;
+  --ag-palette-ink-pale: #7c7290;
+  --ag-palette-ink-ghost: #a79db5;
+}
+
+.theme-dark {
+  /* Night — the black-violet foundation, unchanged. Every ground above it is
+     pulled further toward violet so the surfaces separate by hue, not only by
+     lightness. The hover ground is the exception: it carries a cyan cast, which
+     both separates it from the violet surfaces and puts the second accent hue
+     on screen during ordinary navigation. Its light counterpart does the same
+     job with sky-pale. */
+  --ag-palette-black-violet: #090611;
+  --ag-palette-black-violet-alt: #0e0919;
+  --ag-palette-aubergine: #150f28;
+  --ag-palette-aubergine-light: #1f1638;
+  --ag-palette-sky-shadow: #121e32;
+  --ag-palette-aubergine-form: #1a1230;
+  --ag-palette-violet-shadow: #3a2b55;
+  --ag-palette-violet-shadow-soft: #291e44;
+  --ag-palette-violet-deep: #3b2670;
+
+  /* Light on dark */
+  --ag-palette-ivory: #f5efe8;
+  --ag-palette-ivory-bright: #fbf6f0;
+  --ag-palette-lavender-grey: #b8acc9;
+  --ag-palette-lavender-dim: #857a9b;
+  --ag-palette-lavender-ghost: #635873;
+
+  /* Luminous accents */
+  --ag-palette-ultraviolet: #9a6bff;
+  --ag-palette-ultraviolet-bright: #b78cff;
+  --ag-palette-sky: #6fd3f7;
+  --ag-palette-sky-bright: #9be2fb;
+  --ag-palette-mint: #58d9b4;
+  --ag-palette-tangerine: #ff8a3d;
+  --ag-palette-coral: #ff8095;
+
+  /* State grounds */
+  --ag-palette-sky-ground: #10202e;
+  --ag-palette-mint-ground: #0f2019;
+  --ag-palette-amber-ground: #271408;
+  --ag-palette-amber-highlight: #3e2c10;
+  --ag-palette-coral-ground: #280f16;
+}
