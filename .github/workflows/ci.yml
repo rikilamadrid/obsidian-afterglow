@@ -1,0 +1,26 @@
+name: checks
+
+on:
+  push:
+    branches: ['**']
+  pull_request:
+
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - run: npm ci
+
+      # The same suite that runs locally: required files, manifest validity,
+      # theme.css/src sync, CSS validity, theme policy, token parity, contrast,
+      # surface separation and cross-mode hue coordination — followed by the
+      # negative cases that prove each of those can fail.
+      - run: npm test
