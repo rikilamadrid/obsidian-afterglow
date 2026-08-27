@@ -72,11 +72,12 @@ Run `npm run build` after changing `src/`; Obsidian reads the regenerated
 
 ## Status
 
-Afterglow is **not** in the Obsidian community directory, has **no tagged
-release**, and is installed manually from this repository. The shared token
-foundation, both coordinated modes, automated foundation checks, brand assets,
-and real Obsidian previews are in place. Dedicated per-surface refinement is
-still pending.
+Afterglow is **not** in the Obsidian community directory. Its initial
+[GitHub release](https://github.com/rikilamadrid/obsidian-afterglow/releases/tag/0.1.0)
+is published, and the theme is installed manually from this repository. The
+shared token foundation, both coordinated modes, automated foundation checks,
+brand assets, and real Obsidian previews are in place. Dedicated per-surface
+refinement is still pending.
 
 ## Roadmap
 
