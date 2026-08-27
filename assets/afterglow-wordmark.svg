@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 64" width="360" height="64" role="img" aria-labelledby="afterglow-wordmark-title">
+  <title id="afterglow-wordmark-title">Afterglow</title>
+  <metadata>
+    Palette provenance, exact custom property names as declared in
+    src/02-palette.css under .theme-dark:
+    #9a6bff = --ag-palette-ultraviolet
+    #6fd3f7 = --ag-palette-sky
+  </metadata>
+  <!--
+    The mark from afterglow-mark.svg, set with the word beside it.
+
+    Every letter is a stroked path on a fixed geometric grid: baseline y=44,
+    x-height top y=20, cap top y=8, ascender y=6, descender y=56, round bowls at
+    r=12, one stroke weight throughout. There is no text element and no font
+    reference, so this renders identically on a machine with no fonts installed
+    at all.
+
+    Both colors are palette values from src/02-palette.css, unchanged:
+
+      #9a6bff  ag-palette-ultraviolet  (.theme-dark)
+      #6fd3f7  ag-palette-sky          (.theme-dark)  inside the disc only
+
+    Those two names are written here without their leading double hyphen, which
+    an XML comment may not contain. The exact property names are in the
+    metadata element above, where they can be grepped verbatim.
+
+    No external reference, no script, no font. Nothing in src/ or theme.css may
+    point at this file; css-policy forbids url() there.
+  -->
+
+  <!-- mark, scaled from the 64x64 grid -->
+  <g transform="translate(4 4) scale(0.875)">
+    <g fill="none" stroke="#9a6bff" stroke-linecap="round">
+      <path d="M10.7 23.1 A26 26 0 0 1 53.3 23.1" stroke-width="3" opacity="0.45"/>
+      <path d="M14.8 30 A19 19 0 0 1 49.2 30" stroke-width="3.5" opacity="0.7"/>
+      <path d="M6 38 H58" stroke-width="4"/>
+      <path d="M18 46 H46" stroke-width="3" opacity="0.55"/>
+      <path d="M26 52 H38" stroke-width="3" opacity="0.42"/>
+    </g>
+    <path d="M20 38 A12 12 0 0 1 44 38 Z" fill="#9a6bff"/>
+    <path d="M26 38 A6 6 0 0 1 38 38 Z" fill="#6fd3f7"/>
+  </g>
+
+  <!-- Afterglow -->
+  <g fill="none" stroke="#9a6bff" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round">
+    <!-- A -->
+    <path d="M76 44 L91 8 L106 44"/>
+    <path d="M81.5 33 H100.5"/>
+    <!-- f -->
+    <path d="M128 44 V17 C128 9 133 5 141 7"/>
+    <path d="M120 20 H138"/>
+    <!-- t -->
+    <path d="M159 6 V37 C159 43 163 45 169 44"/>
+    <path d="M151 20 H169"/>
+    <!-- e -->
+    <path d="M179 32 H203"/>
+    <path d="M203 32 A12 12 0 1 0 198.7 41.2"/>
+    <!-- r -->
+    <path d="M213 44 V20"/>
+    <path d="M213 28 C213 22 218 19 225 20"/>
+    <!-- g -->
+    <path d="M236 32 A12 12 0 1 1 260 32 A12 12 0 1 1 236 32"/>
+    <path d="M260 20 V50 C260 56 254 58 247 56"/>
+    <!-- l -->
+    <path d="M272 6 V44"/>
+    <!-- o -->
+    <path d="M285 32 A12 12 0 1 1 309 32 A12 12 0 1 1 285 32"/>
+    <!-- w -->
+    <path d="M321 20 L329 44 L337 26 L345 44 L353 20"/>
+  </g>
+</svg>

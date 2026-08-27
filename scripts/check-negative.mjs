@@ -26,7 +26,7 @@ const repoRoot = join(dirname(fileURLToPath(import.meta.url)), '..');
 const verbose = process.argv.includes('--verbose');
 
 /** Everything a check needs to run. node_modules and .git are irrelevant. */
-const COPIED = ['src', 'scripts', 'manifest.json', 'theme.css', 'README.md', 'LICENSE', 'screenshot.png'];
+const COPIED = ['src', 'scripts', 'assets', 'manifest.json', 'theme.css', 'README.md', 'LICENSE', 'screenshot.png'];
 
 const edit = (root, file, from, to) => {
   const path = join(root, file);
@@ -38,6 +38,23 @@ const edit = (root, file, from, to) => {
 };
 
 const rebuild = (root) => writeFileSync(join(root, 'theme.css'), buildCss(root), 'utf8');
+
+// The original 512x288 flat ivory placeholder, kept as a deterministic fixture.
+const FLAT_SCREENSHOT_PNG = [
+  'iVBORw0KGgoAAAANSUhEUgAAAgAAAAEgCAIAAABNXlwGAAADNklEQVR42u3VMQ0AAAgEsfcvl40JfECTKrjlMl0APBQJAAwA',
+  'AAMAwAAAMAAADAAAAwDAAAAwAAAMAAADAMAAADAAAAwAAAMAwAAAMAAADAAAAwDAAAAwAAAMAAADAMAAAAwAAAMAwAAAMAAA',
+  'DAAAAwDAAAAwAAAMAAADAMAAADAAAAwAAAMAwAAAMAAADAAAAwDAAAAwAAAMAAADAMAAAAxABQADAMAAADAAAAwAAAMAwAAA',
+  'MAAADAAAAwDAAAAwAAAMAAADAMAAADAAAAwAAAMAwAAAMAAADAAAAwDAAAAwAAADAMAAADAAAAwAAAMAwAAAMAAADAAAAwDA',
+  'AAAwAAAMAAADAMAAADAAAAwAAAMAwAAAMAAADAAAAwDAAAAwAAADUAHAAAAwAAAMAAADAMAAADAAAAwAAAMAwAAAMAAADAAA',
+  'AwDAAAAwAAAMAAADAMAAADAAAAwAAAMAwAAAMAAADADAAAAwAAAMAAADAMAAADAAAAwAAAMAwAAAMAAADAAAAwDAAAAwAAAM',
+  'AAADAMAAADAAAAwAAAMAwAAAMAAADADAAAAwAAAMAAADAMAAADAAAAwAAAMAwAAAMAAADAAAAwDAAAAwAAAMAAADAMAAADAA',
+  'AAwAAAMAwAAAMAAADAAAAwAwAAAMAAADAMAAADAAAAwAAAMAwAAAMAAADAAAAwDAAAAwAAAMAAADAMAAADAAAAwAAAMAwAAA',
+  'MAAADAAAAwAwAAAMAAADAMAAADAAAAwAAAMAwAAAMAAADAAAAwDAAAAwAAAMAAADAMAAADAAAAwAAAMAwAAAMAAADAAAAwDA',
+  'AAAMAAADAMAAADAAAAwAAAMAwAAAMAAADAAAAwDAAAAwAAAMAAADAMAAADAAAAwAAAMAwAAAMAAADAAAAwDAAAAMAAADAMAA',
+  'ADAAAAwAAAMAwAAAMAAADAAAAwDAAAAwAAAMAAADAMAAADAAAAwAAAMAwAAAMAAADAAAAwDAAAAMQAIAAwDAAAAwAAAMAAAD',
+  'AMAAADAAAAwAAAMAwAAAMAAADAAAAwDAAAAwAAAMAAADAMAAADAAAAwAAAMAwAAAMAAAAwDAAAAwAAAMAAADAOCCBdzc4lN+',
+  'liiBAAAAAElFTkSuQmCC',
+].join('');
 
 const CASES = [
   {
@@ -57,6 +74,45 @@ const CASES = [
           'base64',
         ),
       ),
+  },
+  {
+    name: 'the listing screenshot is the flat placeholder',
+    expect: 'screenshot-content',
+    apply: (root) =>
+      writeFileSync(
+        join(root, 'screenshot.png'),
+        Buffer.from(FLAT_SCREENSHOT_PNG, 'base64'),
+      ),
+  },
+  {
+    name: 'a README-local asset path is broken',
+    expect: 'docs-assets',
+    apply: (root) =>
+      edit(root, 'README.md', 'assets/preview-light.png', 'assets/missing-preview.png'),
+  },
+  {
+    name: 'a required documentation asset is missing',
+    expect: 'docs-assets',
+    apply: (root) => unlinkSync(join(root, 'assets', 'sample-note.md')),
+  },
+  {
+    name: 'an SVG brand asset loads an external resource',
+    expect: 'docs-assets',
+    apply: (root) =>
+      edit(
+        root,
+        'assets/afterglow-mark.svg',
+        '</svg>',
+        '  <image href="https://assets.example.com/pixel.png"/>\n</svg>',
+      ),
+  },
+  {
+    name: 'a documentation preview exceeds 500 KB',
+    expect: 'docs-assets',
+    apply: (root) => {
+      const path = join(root, 'assets', 'preview-light.png');
+      writeFileSync(path, Buffer.concat([readFileSync(path), Buffer.alloc(500_000)]));
+    },
   },
   {
     name: 'the manifest carries a plugin-only key',
@@ -94,6 +150,14 @@ const CASES = [
     expect: 'css-policy',
     apply: (root) => {
       edit(root, 'src/01-shared.css', 'body {', ':root {\n  --ag-leak: 1;\n}\n\nbody {');
+      rebuild(root);
+    },
+  },
+  {
+    name: 'the runtime theme marker is missing',
+    expect: 'css-policy',
+    apply: (root) => {
+      edit(root, 'src/01-shared.css', '  --ag-theme: afterglow;\n', '');
       rebuild(root);
     },
   },

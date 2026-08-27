@@ -30,6 +30,9 @@ const RULES = [
   },
 ];
 
+const THEME_MARKER = /--ag-theme\s*:\s*afterglow\s*;/g;
+const BODY_THEME_MARKER = /\bbody\s*\{[^}]*--ag-theme\s*:\s*afterglow\s*;/s;
+
 function cssFiles(root) {
   const files = [{ label: 'theme.css', path: join(root, 'theme.css') }];
   for (const file of readdirSync(join(root, 'src')).filter((f) => f.endsWith('.css')).sort()) {
@@ -55,9 +58,24 @@ export function run(root) {
     });
   }
 
+  for (const [label, path] of [
+    ['theme.css', join(root, 'theme.css')],
+    ['src/01-shared.css', join(root, 'src', '01-shared.css')],
+  ]) {
+    const css = readFileSync(path, 'utf8');
+    const markerCount = [...css.matchAll(THEME_MARKER)].length;
+    if (markerCount !== 1) {
+      failures.push(`${label} — expected exactly one --ag-theme: afterglow marker, found ${markerCount}`);
+    } else if (!BODY_THEME_MARKER.test(css)) {
+      failures.push(`${label} — --ag-theme: afterglow must be declared under body`);
+    }
+  }
+
   return {
     ok: failures.length === 0,
     failures,
-    notes: failures.length === 0 ? ['no remote assets, no !important, no :root'] : [],
+    notes: failures.length === 0
+      ? ['no remote assets, no !important, no :root', 'runtime marker is --ag-theme: afterglow under body']
+      : [],
   };
 }

@@ -8,6 +8,9 @@
  */
 
 body {
+  /* Nonvisual identity marker for runtime load verification. */
+  --ag-theme: afterglow;
+
   /* Typography — system and local families only. No bundled or remote fonts.
      Each stack degrades through progressively more common families and ends
      at a generic, so an absent font is never a broken surface. */

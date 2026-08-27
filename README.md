@@ -1,116 +1,164 @@
-# Afterglow
+![Afterglow wordmark](assets/afterglow-wordmark.svg)
 
-An Obsidian theme with two modes that are two expressions of one identity —
-**Pastel Archive** in light, **Ultraviolet Library** in dark. Same typography,
-spacing, borders and shapes; only the color values change.
+*Afterglow — an Obsidian theme in two coordinated modes: Pastel Archive and Ultraviolet Library*
 
-![Afterglow](screenshot.png)
+## What Afterglow is
 
-> **Status: in development.** The token system and both modes are in place.
-> Per-surface refinement — callouts, tables, code blocks, graph, command
-> palette — and the automated check suite are still to come.
+Afterglow is an in-development Obsidian theme for long reading and writing
+sessions. Its light and dark modes share one semantic token system, so switching
+the base color scheme changes the palette without changing the theme's
+typography, spacing, borders, or component shapes.
+
+## Light and dark previews
+
+### Pastel Archive — light
+
+![Pastel Archive light-mode preview in Obsidian](assets/preview-light.png)
+
+### Ultraviolet Library — dark
+
+![Ultraviolet Library dark-mode preview in Obsidian](assets/preview-dark.png)
+
+Both images show the same purpose-written [sample note](assets/sample-note.md),
+at the same scroll position and with the same panes open.
+
+## Design philosophy
+
+Afterglow treats light and dark as two expressions of one identity rather than
+separate themes or a mechanical inversion. Shared semantic roles keep layout
+and meaning stable while each mode supplies its own color values. Readability
+comes first: body text stays neutral and meets WCAG AA, while color carries
+hierarchy, state, and interaction.
+
+## Pastel Archive
+
+Pastel Archive is the light expression: an ivory reading canvas with violet-pale
+surfaces and restrained pastel accents. It uses the same five hue families as
+Ultraviolet Library — violet, sky, mint, amber, and blush — and every light
+family sits within 5° of its dark counterpart. Deeper values from those families
+carry text so the soft palette never becomes low-contrast body copy.
+
+## Ultraviolet Library
+
+Ultraviolet Library is the dark expression: a black-violet foundation,
+aubergine surfaces, ivory text, and focused ultraviolet and sky accents. It uses
+the same five hue families as Pastel Archive, with every dark family within 5°
+of its light counterpart. Glow is restrained to interactive emphasis such as
+links and focus, never paragraph text.
 
 ## Install
 
-Afterglow is not in the community directory yet. To install it manually:
+Afterglow currently supports manual installation:
 
-1. Copy or symlink this repository into your vault at
-   `.obsidian/themes/Afterglow`. **The directory name must be exactly
-   `Afterglow`** — it has to match `name` in `manifest.json`, or Obsidian will
-   not detect the theme.
-2. In Obsidian, open **Settings → Appearance → Themes** and select
+1. Download or clone this repository.
+2. Create a directory named exactly `Afterglow` inside your vault at
+   `.obsidian/themes/Afterglow`.
+3. Copy `manifest.json` and `theme.css` from the repository root into that
+   directory.
+4. In Obsidian, open **Settings → Appearance → Themes** and select
    **Afterglow**.
-3. Switch **Base color scheme** between Light and Dark to move between Pastel
-   Archive and Ultraviolet Library.
+5. Switch **Base color scheme** between Light and Dark to use Pastel Archive or
+   Ultraviolet Library.
 
-Symlinking a clone into a test vault is the quickest development setup:
+For local development, symlink the repository instead of copying generated
+files:
 
 ```sh
-ln -s "$PWD" /path/to/vault/.obsidian/themes/Afterglow
+ln -s /absolute/path/to/obsidian-afterglow /path/to/vault/.obsidian/themes/Afterglow
 ```
 
-Obsidian reloads a theme when its `theme.css` changes, so a rebuild shows up
-without restarting the app.
+Run `npm run build` after changing `src/`; Obsidian reads the regenerated
+`theme.css` through the link.
+
+## Status
+
+Afterglow is **not** in the Obsidian community directory, has **no tagged
+release**, and is installed manually from this repository. The shared token
+foundation, both coordinated modes, automated foundation checks, brand assets,
+and real Obsidian previews are in place. Dedicated per-surface refinement is
+still pending.
+
+## Roadmap
+
+The remaining work is unstarted:
+
+- refine properties, backlinks, search, graph, callouts, tables, code, command
+  palette, modals, and settings;
+- complete mobile-specific refinement and visual review;
+- prepare public distribution after the supported surfaces and documentation
+  are complete.
 
 ## Development
 
-Requires Node 18 or newer. The tooling is development-only — no JavaScript and
-no dependency ships with the theme.
+Development requires Node.js 18 or newer. Tooling is development-only; no
+JavaScript or dependency ships with the theme.
 
 ```sh
-npm ci           # install dev tooling
-npm run build    # concatenate src/*.css into theme.css
-npm test         # run the check suite, then the negative cases
-npm run lint     # stylelint on its own, with CLI output
+npm ci
+npm run build
+npm test
+npm run lint
 ```
 
-Author CSS in `src/`. Modules are concatenated in filename order, so the
-numeric prefix is the cascade order. **`theme.css` is generated and committed —
-never edit it by hand**; it is committed because Obsidian and the community
-directory read it directly from the repository.
+Author CSS in `src/`. The build concatenates the modules in numeric order into
+the committed `theme.css`; never edit that generated file by hand.
 
-| Module | Layer |
+| Module | Responsibility |
 | --- | --- |
-| `01-shared.css` | Everything that is not a color, defined once for both modes |
-| `02-palette.css` | Raw values, per mode. Never referenced outside layer 2 |
-| `03-roles.css` | Semantic roles — shared names, mode-specific values |
-| `04-obsidian.css` | Roles assigned to Obsidian's own CSS variables |
-| `05-motion.css` | `prefers-reduced-motion` |
+| `01-shared.css` | Shared typography, spacing, shapes, motion values, and runtime identity |
+| `02-palette.css` | Raw mode-specific palette values |
+| `03-roles.css` | Semantic roles defined for both modes |
+| `04-obsidian.css` | Semantic roles mapped to Obsidian variables |
+| `05-motion.css` | Reduced-motion behavior |
 
-A color flows palette → role → Obsidian variable. Component styling consumes
-roles only; if a component needs a color with no role, the fix is a new role
-defined in **both** modes, not a raw value.
-
-To confirm the stylesheet is loaded rather than merely listed, open the
-developer console with the theme selected and run:
+To confirm Afterglow is loaded, select it in Obsidian and run this in the
+developer console:
 
 ```js
-getComputedStyle(document.body).getPropertyValue('--ag-theme') // "afterglow"
+getComputedStyle(document.body).getPropertyValue('--ag-theme').trim()
 ```
+
+The result is `afterglow`.
 
 ## Checks
 
-A theme has no unit-testable logic, so the suite verifies the shipped artifact.
-`npm test` runs nine checks and then fourteen negative cases:
+`npm test` currently runs eleven repository checks followed by twenty negative
+cases that deliberately break each contract and prove the responsible check can
+fail.
 
-| Check | Fails when |
+| Check | Verifies |
 | --- | --- |
-| `required-files` | a release file is missing, or the screenshot is not 512×288 |
-| `manifest` | a required key is missing, a plugin-only key is present, or the version is not strict semver |
-| `build-sync` | the committed `theme.css` is not what `src/` builds |
-| `css-validity` | stylelint reports a parse error or rule violation |
-| `css-policy` | a remote asset, an `!important`, or a `:root` selector appears |
-| `token-parity` | a semantic role exists in one mode only, or resolves to nothing |
-| `contrast` | any text/background pair falls below WCAG AA |
-| `surface-separation` | two adjacent grounds are indistinguishable in both lightness and hue |
-| `hue-coordination` | a light role drifts to a different hue family than its dark counterpart |
+| `required-files` | Required shipping files exist and `screenshot.png` is 512×288 |
+| `screenshot-content` | The listing screenshot clears the flat-placeholder content threshold |
+| `docs-assets` | README-local paths, expected documentation assets, safe SVGs, and optimized matching previews |
+| `manifest` | Theme metadata is complete and uses strict semantic versioning |
+| `build-sync` | Committed `theme.css` matches the output from `src/` |
+| `css-validity` | Source and generated stylesheets parse and satisfy stylelint |
+| `css-policy` | No remote assets, `!important`, or `:root`; the runtime marker is present |
+| `token-parity` | Both modes define the same semantic roles |
+| `contrast` | Important text/background pairs meet WCAG AA |
+| `surface-separation` | Adjacent grounds remain distinguishable |
+| `hue-coordination` | Corresponding light and dark roles stay in the intended hue families |
 
-The last two exist because of a defect the others could not see. An early
-Pastel Archive passed contrast and parity comfortably and still had to be
-rejected on sight: its surfaces were separated in lightness but shared one warm
-neutral hue, so the mode read as sepia. `hue-coordination` now catches that
-regression as a 139° drift.
-
-`npm run check:negative` copies the repository to a throwaway directory, breaks
-one thing, and asserts the responsible check reports it. A check nobody has
-seen fail is not evidence, so adding a check without a negative case fails the
-run.
+Automated checks verify the shipped artifact and its contracts. Real-vault
+review remains the evidence for visual claims.
 
 ## Design rules
 
-These are constraints, not preferences:
+- No `!important`; users' own CSS snippets retain control.
+- No remote assets, network calls, or bundled fonts.
+- Override Obsidian variables under `body`, `.theme-light`, or `.theme-dark`,
+  never `:root`.
+- Keep palette values, semantic roles, and Obsidian mappings in separate layers.
+- Define every semantic role in both modes.
+- Keep body text neutral and WCAG AA; use color for hierarchy, semantics, and
+  interaction.
+- Honor `prefers-reduced-motion`.
 
-- No `!important` anywhere — it blocks users' own CSS snippets.
-- No remote assets and no network calls. System and local font stacks only.
-- Obsidian's CSS variables are overridden under `body`, `.theme-light` and
-  `.theme-dark`; documented variables are preferred over selectors.
-- Every semantic role is defined in both modes.
-- Body text and essential controls meet WCAG AA in both modes, verified by an
-  automated check rather than by eye.
-- Color carries hierarchy, semantics and interaction — never body paragraphs.
-  Dark-mode glow is limited to the focus ring, caret, active tab, links and
-  graph nodes.
+## Credits
+
+Afterglow is designed and maintained by Ricardo Lamadrid.
 
 ## License
 
-[MIT](LICENSE).
+[MIT](LICENSE)

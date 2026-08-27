@@ -18,6 +18,8 @@ import { join, dirname, resolve as resolvePath } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import * as requiredFiles from './checks/required-files.mjs';
+import * as screenshotContent from './checks/screenshot-content.mjs';
+import * as docsAssets from './checks/docs-assets.mjs';
 import * as manifest from './checks/manifest.mjs';
 import * as buildSync from './checks/build-sync.mjs';
 import * as cssPolicy from './checks/css-policy.mjs';
@@ -29,6 +31,8 @@ import * as hueCoordination from './checks/hue-coordination.mjs';
 
 export const CHECKS = [
   requiredFiles,
+  screenshotContent,
+  docsAssets,
   manifest,
   buildSync,
   cssValidity,
