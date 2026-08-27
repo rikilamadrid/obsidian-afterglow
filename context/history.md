@@ -4,6 +4,13 @@ Compact record of completed work.
 
 ## Completed
 
+### 2026-08-27 — Feature 02: Afterglow Brand Identity and Release Documentation
+
+- Outcome: `Afterglow now has repository-local vector branding, a controlled sample note, matched real-vault previews for Pastel Archive and Ultraviolet Library, a real 512×288 listing screenshot, accurate installation and development documentation, a runtime identity marker, and deterministic documentation-asset and placeholder-screenshot checks.`
+- Verification: `Human acceptance followed real-vault review of both modes and the runtime --ag-theme marker. npm test passes 11 repository checks and catches all 20 negative cases; npm run lint and the GitHub Actions checks are green. GitHub's Markdown renderer resolves the wordmark and both preview assets from the merged branch.`
+- Commit/PR: `9eb9ef1 — PR #2, squash-merged with CI green`
+- Follow-up: `Publish release 0.1.0 with manifest.json and theme.css, then submit Afterglow to the Obsidian Community Themes directory. Per-surface and mobile refinement remain later Features.`
+
 ### 2026-08-26 — Feature 01: Theme Foundation and Token System
 
 - Outcome: `Afterglow is installable in Obsidian as a real theme. A three-layer token system — palette, semantic roles, Obsidian variable mapping — renders both Pastel Archive and Ultraviolet Library from one shared role layer, with typography, spacing, borders and shapes defined once for both modes. Nine artifact checks run in GitHub Actions.`
